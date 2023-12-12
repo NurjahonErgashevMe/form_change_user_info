@@ -1,0 +1,33 @@
+@use "/src/styles/colors.scss" as *;
+
+@font-face {
+  font-family: TT Travels;
+  font-weight: 700;
+  font-style: normal;
+  src: url("./fonts/TT\ Travels\ Trial\ Bold.otf");
+}
+@font-face {
+  font-family: TT Travels;
+  font-style: italic;
+  font-weight: 700;
+  src: url("./fonts/TT\ Travels\ Trial\ Bold\ Italic.otf");
+}
+@font-face {
+  font-family: TT Travels;
+  src: url("./fonts/TT\ Travels\ Trial\ Regular.otf");
+  font-weight: 400;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: TT Travels, sans-serif;
+  color: $black;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

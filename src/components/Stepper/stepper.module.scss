@@ -1,0 +1,78 @@
+@use "/src/styles/colors.scss" as colors;
+
+.stepperWrapper {
+  height: 40px;
+}
+
+.stepper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  background-color: colors.$tertiaryWhite;
+  height: 10px;
+}
+
+.step {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  .stepCircle {
+    min-width: 17px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: colors.$purple;
+    position: relative;
+    .label {
+      position: absolute;
+      bottom: -20px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px;
+      color: colors.$purple;
+    }
+    .dot {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: white;
+      }
+    }
+  }
+  .stepCircleActive {
+    position: relative;
+  }
+  .stepCircleDisable {
+    background-color: colors.$tertiaryWhite;
+    .label {
+      color: colors.$tertiaryWhite;
+    }
+  }
+}
+
+.nonStep {
+  width: 16px;
+}
+
+.connector {
+  width: 98%;
+  height: 10px;
+  background-color: colors.$tertiaryWhite;
+}
+
+.connectorActive {
+  background-color: colors.$purple;
+}

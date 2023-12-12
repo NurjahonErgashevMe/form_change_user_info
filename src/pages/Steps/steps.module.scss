@@ -1,0 +1,14 @@
+.step {
+  span {
+    display: none;
+  }
+}
+
+.steps {
+  padding: 25px;
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
