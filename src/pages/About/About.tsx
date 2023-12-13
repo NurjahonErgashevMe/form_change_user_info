@@ -12,7 +12,7 @@ import CustomButton from "../../components/Button/Button";
 import { InputMask } from "@react-input/mask";
 import CustomInputMask from "../../components/InputMask/InputMask";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { changeData } from "../../store/about";
+import { changeData } from "../../store/user";
 const schema = yup.object({
   phone: yup.string().required("Заполните поле phone"),
   email: yup
@@ -27,7 +27,7 @@ type FormValues = {
 };
 
 const About: FC = () => {
-  const { values: about } = useAppSelector((state) => state.about);
+  const { values: about } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigation = useNavigate();
   const {
@@ -81,7 +81,7 @@ const About: FC = () => {
             errorMessage={errors?.phone?.message}
             mask="+7 ___ __-__-__"
             replacement="_"
-            defaultValue={about.phone}
+            defaultValue={about?.phone}
             {...register("phone")}
           />
         </div>

@@ -2,11 +2,14 @@ import { Button, ButtonProps, cn } from "@nextui-org/react";
 import { FC } from "react";
 import s from "./button.module.scss";
 
-const CustomButton: FC<ButtonProps & { bg?: string; textColor?: string }> = ({
+const CustomButton: FC<
+  ButtonProps & { bg?: string; textColor?: string; borderColor?: string }
+> = ({
   className,
   style,
   bg = "#5558fa",
-  textColor = "#fff",
+  textColor = "#5558fa",
+  borderColor = "#5558fa",
   ...props
 }) => {
   return (
@@ -18,6 +21,7 @@ const CustomButton: FC<ButtonProps & { bg?: string; textColor?: string }> = ({
         fontWeight: 500,
         color: textColor,
         backgroundColor: bg,
+        borderColor,
         ...style,
       }}
       {...props}

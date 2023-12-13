@@ -4,9 +4,9 @@ export const mock_user: IUser = {
   surname: "Иванов",
   name: "Алексей",
   about: "",
-  advantages: [""],
-  checkbox: [],
-  radio: -1,
+  advantages: null,
+  checkbox: { first: false, second: false, third: false },
+  radio: "",
   nickname: "@alex-ivanov",
   sex: "man",
   social_media: [
@@ -27,4 +27,6 @@ export const mock_user: IUser = {
       referance: "https://t.me/NurjahonErgashevMe",
     },
   ],
+  email: "",
+  phone: "",
 };

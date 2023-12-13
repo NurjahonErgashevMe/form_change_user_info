@@ -1,0 +1,55 @@
+@use "/src/styles/breakpoints.scss" as breakpoints;
+@use "/src/styles/colors.scss" as colors;
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  .field {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .buttons {
+    margin-top: 65px;
+  }
+  .delete {
+    width: 30px;
+    height: 50px;
+    border-radius: 0;
+    background-color: transparent;
+  }
+  .addButtonWrapper {
+    height: 50px;
+    .addButton {
+      width: 50px;
+      min-width: 0;
+      height: 100%;
+      border-radius: 4px !important;
+      border-color: colors.$purple;
+      color: colors.$purple;
+      font-size: 20px;
+    }
+  }
+  .checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    .checkboxItem {
+      display: flex;
+      gap: 8px;
+    }
+  }
+}
+
+@media (min-width : #{breakpoints.$tablet-width}) {
+  .inputWrapper {
+    width: 45%;
+  }
+}

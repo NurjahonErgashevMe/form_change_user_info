@@ -1,11 +1,17 @@
 interface IUser {
   nickname: string;
   name: string;
+  email: string;
+  phone: string;
   surname: string;
   sex: "man" | "woman";
-  advantages: string[];
-  checkbox: number[];
-  radio: number;
+  advantages: string[] | null;
+  checkbox: {
+    first: NonNullable<boolean | undefined>;
+    second: NonNullable<boolean | undefined>;
+    third: NonNullable<boolean | undefined>;
+  };
+  radio: string;
   about: string;
   social_media?: {
     title:

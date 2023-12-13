@@ -1,3 +1,5 @@
+@use "/src/styles/breakpoints.scss" as breakpoints;
+
 .step {
   span {
     display: none;
@@ -5,10 +7,11 @@
 }
 
 .steps {
-  padding: 25px;
-  .buttons {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  padding: 10px;
+}
+
+@media(min-width : #{breakpoints.$tablet-width}){
+  .steps{
+    padding: 25px;
   }
 }
