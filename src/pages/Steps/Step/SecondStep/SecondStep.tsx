@@ -14,22 +14,13 @@ import {
   Radio,
   RadioGroup,
 } from "@nextui-org/react";
-import ButtonGroup from "../../components/ButtonGroup/ButtonGroup";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 import { changeData } from "../../../../store/user";
 import DeleteIcon from "../../../../../public/Delete.jpg";
 import { useNavigate } from "react-router-dom";
 import ErrorText from "../../../../components/ErrorText/ErrorText";
-
-const schema = yup.object({
-  advantages: yup.array().of(
-    yup.object().shape({
-      advantage: yup.string().required("Заполните поле"),
-    })
-  ),
-  checkbox: yup.array().min(1, "Выберите хотя бы один чекбокс"),
-  radio: yup.string().required("Выберите одну из вариантов"),
-});
+import { IUser } from "../../../../types/user";
+import CustomButton from "../../../../components/Button/Button";
 
 interface FormValues {
   advantages?: { advantage: string }[];
@@ -41,11 +32,31 @@ interface StepProps {
   step: string;
 }
 
-const SecondStep: FC<StepProps> = ({ step }) => {
+const SecondStep: FC<StepProps> = () => {
   const { values: defaultUserDatas } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const navigation = useNavigate();
+
+  const schema = yup.object({
+    advantages: yup.array().of(
+      yup.object().shape({
+        advantage: yup.string().required("Заполните поле"),
+      })
+    ),
+    checkbox: yup
+      .array()
+      .min(1, "Выберите хотя бы один чекбокс")
+      .default(
+        Object.entries(defaultUserDatas.checkbox)
+          .filter(([_, value]) => value)
+          .map(([key]) => key)
+      ),
+    radio: yup
+      .string()
+      .required("Выберите одну из вариантов")
+      .default(defaultUserDatas.radio),
+  });
 
   const {
     handleSubmit,
@@ -53,6 +64,7 @@ const SecondStep: FC<StepProps> = ({ step }) => {
     register,
     control,
     setValue,
+    getValues,
   } = useForm<FormValues>({
     resolver: yupResolver(schema as any),
   });
@@ -68,23 +80,25 @@ const SecondStep: FC<StepProps> = ({ step }) => {
     { value: "3", name: "third" },
   ];
 
-  const handleSubmitForm = ({ advantages, radio, checkbox }: FormValues) => {
-    // const parsingCheckbox = checkboxes
-    //   .filter((item) => checkbox.includes(item.value.toString()))
-    //   .reduce((item: any, arr: object) => {});
-    console.log(parsingCheckbox);
-    // dispatch(
-    //   changeData({
-    //     values: {
-    //       advantages: advantages?.map((i) => i.advantage),
-    //       radio,
-    //       checkbox: { ...defaultUserDatas.checkbox, ...parsingCheckbox },
-    //     },
-    //   })
-    // );
-    // return navigation(`/step/3`);
+  const checkboxesIncludes = (checkbox: string[]): IUser["checkbox"] => {
+    return {
+      first: checkbox?.includes("first"),
+      second: checkbox?.includes("second"),
+      third: checkbox?.includes("third"),
+    };
   };
-  // console.log(defaultUserDatas.checkbox);
+  const handleSubmitForm = ({ advantages, radio, checkbox }: FormValues) => {
+    dispatch(
+      changeData({
+        values: {
+          advantages: advantages?.map((i) => i.advantage),
+          radio,
+          checkbox: checkboxesIncludes(checkbox),
+        },
+      })
+    );
+    return navigation(`/step/3`);
+  };
 
   useEffect(() => {
     if (!fields.length) {
@@ -96,7 +110,7 @@ const SecondStep: FC<StepProps> = ({ step }) => {
     }
   }, [fields, prepend]);
   return (
-    <div className={s.firstStep}>
+    <div className={s.secondStep}>
       <form
         onSubmit={handleSubmit(handleSubmitForm)}
         onError={(e) => console.log(e, "error")}
@@ -145,7 +159,6 @@ const SecondStep: FC<StepProps> = ({ step }) => {
           <Controller
             name="checkbox"
             control={control}
-            defaultValue={[]}
             render={({ field }) => (
               <CheckboxGroup
                 defaultValue={Object.entries(defaultUserDatas.checkbox)
@@ -157,7 +170,7 @@ const SecondStep: FC<StepProps> = ({ step }) => {
                 {checkboxes?.map((item, index) => (
                   <Checkbox
                     color="primary"
-                    value={item.value.toString()}
+                    value={item.name}
                     classNames={{
                       icon: s.checkBoxIcon,
                       wrapper: s.checkboxItem,
@@ -199,7 +212,31 @@ const SecondStep: FC<StepProps> = ({ step }) => {
             </Radio>
           </RadioGroup>
         </div>
-        <ButtonGroup step={step} className={s.buttons} type="submit" />
+        <div className={s.buttons}>
+          <CustomButton
+            variant="faded"
+            bg="transparent"
+            onClick={() => {
+              dispatch(
+                changeData({
+                  values: {
+                    advantages: getValues("advantages")?.map(
+                      (i) => i.advantage
+                    ),
+                    checkbox: checkboxesIncludes(getValues("checkbox")),
+                    radio: getValues("radio"),
+                  },
+                })
+              );
+              return navigation(`/step/1`);
+            }}
+          >
+            Назад
+          </CustomButton>
+          <CustomButton textColor="#fff" type="submit">
+            Далее
+          </CustomButton>
+        </div>
       </form>
     </div>
   );

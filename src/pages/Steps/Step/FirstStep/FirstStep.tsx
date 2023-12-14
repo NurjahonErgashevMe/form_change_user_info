@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import ButtonGroup from "../../components/ButtonGroup/ButtonGroup";
 import cn from "classnames";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
 import { changeData } from "../../../../store/user";
 import { useNavigate } from "react-router-dom";
 import ErrorText from "../../../../components/ErrorText/ErrorText";
+import CustomButton from "../../../../components/Button/Button";
 
 const schema = yup.object({
   nickname: yup.string().required("Заполните поле 'Никнейм'"),
@@ -29,13 +29,14 @@ interface StepProps {
   step: string;
 }
 
-const FirstStep: FC<StepProps> = ({ step }) => {
+const FirstStep: FC<StepProps> = () => {
   const { values: defaultUserDatas } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const {
     handleSubmit,
     formState: { errors },
     register,
+    getValues,
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
   });
@@ -127,7 +128,30 @@ const FirstStep: FC<StepProps> = ({ step }) => {
           </Select>
           <ErrorText>{errors?.sex ? "Выберите пол" : null}</ErrorText>
         </div>
-        <ButtonGroup step={step} className={s.buttons} type="submit" />
+        <div className={s.buttons}>
+          <CustomButton
+            variant="faded"
+            bg="transparent"
+            onClick={() => {
+              dispatch(
+                changeData({
+                  values: {
+                    nickname: getValues("nickname"),
+                    name: getValues("name"),
+                    sex: getValues("sex"),
+                    surname: getValues("surname"),
+                  },
+                })
+              );
+              return navigation(`/`);
+            }}
+          >
+            Назад
+          </CustomButton>
+          <CustomButton textColor="#fff" type="submit">
+            Далее
+          </CustomButton>
+        </div>
       </form>
     </div>
   );

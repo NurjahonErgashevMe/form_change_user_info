@@ -11,19 +11,20 @@ form {
   }
 
   .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     margin-top: 65px;
   }
 }
-
-
 
 .selectPopoverContent {
   height: 100%;
   border-radius: 4px !important;
 }
 
-@media(min-width : #{breakpoints.$tablet-width}){
-  .inputWrapper{
+@media (min-width : #{breakpoints.$tablet-width}) {
+  .inputWrapper {
     width: 45%;
   }
 }

@@ -1,0 +1,36 @@
+@use "/src/styles/breakpoints.scss" as breakpoints;
+
+.modal {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    img {
+      text-align: center;
+    }
+  }
+  .close {
+    top: 24px;
+    right: 24px;
+    width: 30px;
+    position: absolute;
+    background-color: transparent;
+  }
+}
+
+@media (min-width : #{breakpoints.$tablet-width}) {
+  .modal {
+    width: 400px;
+  }
+}

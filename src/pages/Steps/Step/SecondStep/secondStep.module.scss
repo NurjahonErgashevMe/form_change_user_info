@@ -11,12 +11,16 @@ form {
     gap: 16px;
   }
   .inputWrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
   .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     margin-top: 65px;
   }
   .delete {
@@ -50,6 +54,6 @@ form {
 
 @media (min-width : #{breakpoints.$tablet-width}) {
   .inputWrapper {
-    width: 45%;
+    width: 50% !important;
   }
 }

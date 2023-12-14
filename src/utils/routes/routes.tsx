@@ -9,8 +9,9 @@ const routes = createBrowserRouter([
     element: <Outlet />,
     children: [
       {
-        path: "about",
+        path: "",
         element: <About />,
+        index: true,
       },
       {
         path: "step",

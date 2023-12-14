@@ -16,7 +16,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   const navigation = useNavigate();
   const prev = () => {
     if (Number(step) === 1) {
-      return navigation("/about");
+      return navigation("/");
     }
     return navigation(`/step/${Number(step) - 1}`);
   };

@@ -14,7 +14,10 @@ import CustomInputMask from "../../components/InputMask/InputMask";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { changeData } from "../../store/user";
 const schema = yup.object({
-  phone: yup.string().required("Заполните поле phone"),
+  phone: yup
+    .string()
+    .required("Заполните поле phone")
+    .min(13, "Минимум 8 цифр"),
   email: yup
     .string()
     .email("Неправильный формат . Ожидалось email")
@@ -99,7 +102,9 @@ const About: FC = () => {
           />
         </div>
         <div className={s.button}>
-          <CustomButton type="submit">Начать</CustomButton>
+          <CustomButton textColor="#fff" type="submit">
+            Начать
+          </CustomButton>
         </div>
       </form>
     </div>

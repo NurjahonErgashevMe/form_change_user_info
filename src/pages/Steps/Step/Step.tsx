@@ -3,7 +3,7 @@ import s from "./step.module.scss";
 import { useParams } from "react-router-dom";
 import FirstStep from "./FirstStep/FirstStep";
 import SecondStep from "./SecondStep/SecondStep";
-import ThirdStep from "./Third/ThirdStep";
+import ThirdStep from "./ThirdStep/ThirdStep";
 const Step: FC = () => {
   const { step } = useParams();
 

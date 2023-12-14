@@ -5,25 +5,19 @@ form {
   flex-direction: column;
   gap: 24px;
   .inputWrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
   .buttons {
+    width: 100%;
     margin-top: 65px;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
 
 
-.selectPopoverContent {
-  height: 100%;
-  border-radius: 4px !important;
-}
-
-@media(min-width : #{breakpoints.$tablet-width}){
-  .inputWrapper{
-    width: 45%;
-  }
-}

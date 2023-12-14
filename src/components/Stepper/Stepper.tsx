@@ -2,6 +2,7 @@ import { FC } from "react";
 import s from "./stepper.module.scss";
 import SmallCheckImage from "../../../public/Check_small.png";
 import cn from "classnames";
+import { Link } from "react-router-dom";
 interface StepperProps {
   activeStep: number;
   steppers: { label: string | number }[];
@@ -25,7 +26,10 @@ const Stepper: FC<StepperProps> = ({ activeStep, steppers }) => {
               })}
             >
               {activeStep > index + 1 ? (
-                <img src={SmallCheckImage}></img>
+                <Link to={`./${index + 1}`}>
+                  {" "}
+                  <img src={SmallCheckImage}></img>
+                </Link>
               ) : null}
               {activeStep === index + 1 ? (
                 <div className={s.dot}>
